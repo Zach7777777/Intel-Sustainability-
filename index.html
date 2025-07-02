@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intel - Sustainability Through the Ages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d6e9f0 100%);
+            min-height: 100vh;
+            overflow-x: auto;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .intel-logo {
+            font-size: 3.5em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4em;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-container {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .timeline-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: 300px;
+            min-height: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #0066CC, #2196F3);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+
+        .timeline-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-year {
+            font-size: 3em;
+            font-weight: 800;
+            color: #0066CC;
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-card:hover .card-year {
+            transform: scale(1.1);
+            text-shadow: 0 4px 8px rgba(0,102,204,0.3);
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .timeline-card:hover .card-title {
+            color: #0066CC;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 160px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+            filter: grayscale(0.2);
+        }
+
+        .timeline-card:hover .card-image {
+            transform: scale(1.05);
+            filter: grayscale(0) brightness(1.1);
+        }
+
+        .card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .timeline-card:hover .card-description {
+            opacity: 1;
+            max-height: 200px;
+            margin-top: 15px;
+        }
+
+        .sustainability-highlight {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.2s;
+        }
+
+        .timeline-card:hover .sustainability-highlight {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+            font-size: 1.1em;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -7s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(0) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5em;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1em;
+                padding: 0 20px;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline-card {
+                width: 90%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="intel-logo">intel</div>
+        <h1 class="hero-title">SUSTAINABILITY<br>THROUGH THE AGES</h1>
+        <p class="hero-subtitle">
+            Explore Intel's journey through time, discovering how our
+            commitment to innovation has shaped a more sustainable future
+            for technology and our planet.
+        </p>
+    </div>
+
+    <div class="timeline-container">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-card">
+                <div class="card-year">1968</div>
+                <h3 class="card-title">Intel Founded</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='160' viewBox='0 0 300 160'%3E%3Crect width='300' height='160' fill='%23f0f8ff'/%3E%3Ccircle cx='150' cy='80' r='40' fill='%230066CC' opacity='0.2'/%3E%3Ctext x='150' y='85' text-anchor='middle' fill='%230066CC' font-family='Arial' font-size='16' font-weight='bold'%3EIntel Founded%3C/text%3E%3C/svg%3E" alt="Intel Founded" class="card-image">
+                <div class="card-description">
+                    The birth of Intel marked the beginning of the semiconductor revolution. Founded by Robert Noyce and Gordon Moore, Intel started with a vision to create memory solutions.
+                </div>
+                <div class="sustainability-highlight">
+                    🌱 Early Foundation: Established principles of innovation and responsible manufacturing that would later evolve into comprehensive sustainability practices.
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="card-year">1971</div>
+                <h3 class="card-title">First Microprocessor</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='160' viewBox='0 0 300 160'%3E%3Crect width='300' height='160' fill='%23e8f5e8'/%3E%3Crect x='100' y='40' width='100' height='80' fill='%23333' rx='5'/%3E%3Crect x='110' y='50' width='80' height='60' fill='%23666' rx='3'/%3E%3Ctext x='150' y='135' text-anchor='middle' fill='%234CAF50' font-family='Arial' font-size='14' font-weight='bold'%3E4004 Microprocessor%3C/text%3E%3C/svg%3E" alt="First Microprocessor" class="card-image">
+                <div class="card-description">
+                    The Intel 4004, the world's first microprocessor, revolutionized computing by putting the power of a computer on a single chip, enabling more efficient and compact designs.
+                </div>
+                <div class="sustainability-highlight">
+                    ⚡ Energy Efficiency: The 4004's compact design reduced power consumption and material usage, setting the foundation for energy-efficient computing.
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="card-year">1978</div>
+                <h3 class="card-title">8086 Processor</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='160' viewBox='0 0 300 160'%3E%3Crect width='300' height='160' fill='%23fff8e1'/%3E%3Crect x='80' y='30' width='140' height='100' fill='%23333' rx='8'/%3E%3Crect x='90' y='40' width='120' height='80' fill='%23666' rx='5'/%3E%3Ctext x='150' y='85' text-anchor='middle' fill='%23FFF' font-family='Arial' font-size='12' font-weight='bold'%3E8086%3C/text%3E%3Ctext x='150' y='145' text-anchor='middle' fill='%23FF9800' font-family='Arial' font-size='14' font-weight='bold'%3E16-bit Architecture%3C/text%3E%3C/svg%3E" alt="8086 Processor" class="card-image">
+                <div class="card-description">
+                    Intel introduces the 386 processor with 32-bit architecture, ushering in a new era of performance and multitasking for personal computers.
+                </div>
+                <div class="sustainability-highlight">
+                    🔄 Performance Per Watt: Advanced architecture delivered more computing power while maintaining energy efficiency, reducing the environmental impact per calculation.
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="card-year">2025</div>
+                <h3 class="card-title">Net-Zero Commitment</h3>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='160' viewBox='0 0 300 160'%3E%3Crect width='300' height='160' fill='%23e8f5e8'/%3E%3Ccircle cx='150' cy='80' r='50' fill='%234CAF50' opacity='0.3'/%3E%3Cpath d='M120 60 L130 70 L180 55' stroke='%234CAF50' stroke-width='4' fill='none'/%3E%3Ctext x='150' y='130' text-anchor='middle' fill='%234CAF50' font-family='Arial' font-size='12' font-weight='bold'%3ESustainable Future%3C/text%3E%3Ctext x='150' y='145' text-anchor='middle' fill='%234CAF50' font-family='Arial' font-size='10'%3ENet-Zero by 2040%3C/text%3E%3C/svg%3E" alt="Sustainability Goals" class="card-image">
+                <div class="card-description">
+                    Intel's comprehensive sustainability strategy focuses on achieving net-zero greenhouse gas emissions by 2040 and creating more sustainable products and processes.
+                </div>
+                <div class="sustainability-highlight">
+                    🌍 RISE Strategy: Responsible, Inclusive, Sustainable, and Enabling technology for a better world. Zero waste to landfill by 2030, 100% renewable energy, and AI for sustainability initiatives.
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            Scroll to view timeline | Hover over cards to learn more!
+        </div>
+    </div>
+
+    <script>
+        // Add interactive particle effects
+        function createParticles() {
+            const container = document.querySelector('.floating-elements');
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 8 + 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = `rgba(33, 150, 243, ${Math.random() * 0.3 + 0.1})`;
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `float ${Math.random() * 10 + 15}s infinite linear`;
+                particle.style.animationDelay = `-${Math.random() * 10}s`;
+                container.appendChild(particle);
+            }
+        }
+
+        // Enhanced hover effects
+        document.querySelectorAll('.timeline-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+                
+                // Add ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '0';
+                ripple.style.height = '0';
+                ripple.style.background = 'rgba(33, 150, 243, 0.3)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.top = '50%';
+                ripple.style.left = '50%';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.transition = 'all 0.6s ease';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.zIndex = '-1';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.style.width = '300px';
+                    ripple.style.height = '300px';
+                    ripple.style.opacity = '0';
+                }, 50);
+                
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 650);
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Add smooth scrolling for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.timeline-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
